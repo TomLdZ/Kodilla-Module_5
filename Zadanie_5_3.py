@@ -15,7 +15,7 @@ class BaseContact:
     
     @property
     def label_length(self):
-        return f"Number of letters in name = {len(self.name)}"
+        return len(self.name)
 
 class BusinessContact(BaseContact):
     def __init__(self, name, phone, company, position) -> str:
@@ -27,38 +27,35 @@ class BusinessContact(BaseContact):
     def __str__(self):
         return f"Name: {self.name}, Phone no.: {self.phone}, Address e'mail: {self.email}, Company name: {self.company}, Position: {self.position}"
 
-    def contact(self):
-        super().contact()
-
-    @property
-    def label_length(self):
-        super().label_length()
 
 
-contact_list = []
 
 def create_contact(type: str, quantity: int):
-    if type == "Base":
-        try:
+    contact_list = []
+    if isinstance(quantity, int):
+        if type == "Base":
             for i in range(quantity):
                 contact = BaseContact(fake.name(), fake.phone_number())
-                contact_list.append(contact)
-        except TypeError:
-            print("Quantity must be an integer")
-    elif type == "Business":
-        try:
+                contact_list.append(contact)  
+        elif type == "Business":
             for i in range(quantity):
                 contact = BusinessContact(fake.name(), fake.phone_number(), fake.company(), fake.job())
                 contact_list.append(contact)
-        except TypeError:
-            print("Quantity must be an integer")
+        else:
+            print("Only types 'Base' and 'Business' are allowed")
+        return contact_list
     else:
-        print("Only types 'Base' and 'Business' are allowed")
+        print("Quantity must be an integer")
 
-create_contact("Business", 5)
+contact_list = create_contact("Business", 3)
 
 for c in contact_list:
     print(c)
+
+
+
+
+
 
 
 
