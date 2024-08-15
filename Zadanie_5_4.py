@@ -60,7 +60,8 @@ class Series(Movie):
 class Methods:
     def __init__(self):
         pass
-
+    
+    @staticmethod
     def get_movies(list: list):
         movies = []
         for i in list:
@@ -68,6 +69,7 @@ class Methods:
                 movies.append(i)
         return sorted(movies, key=lambda i: i.title_pr)
 
+    @staticmethod
     def get_series(list: list):
         serieses = []
         for i in list:
@@ -75,19 +77,23 @@ class Methods:
                 serieses.append(i)
         return sorted(serieses, key=lambda i: i.title_pr)
 
+    @staticmethod
     def search(title: str, list: list):
         for i in list:
             if title.casefold() == i.title_pr.casefold():
                 return i
      
+    @staticmethod
     def generate_views(list: list):
         item = random.choice(list)
         item.no_of_plays_pr = random.randint(0, 101)
 
+    @staticmethod
     def genetare_views_x10(list: list):
         for i in range(10):
             Methods.generate_views(list)
 
+    @staticmethod
     def top_titles(list: list, content_type: str, quantity: int):
         if content_type.casefold() == "movie":
             movies = sorted(Methods.get_movies(list), key=lambda movie: movie.no_of_plays_pr, reverse=True)
@@ -100,6 +106,7 @@ class Methods:
         else:
             print("Only types 'Movie' and 'Series' are allowed")
 
+    @staticmethod
     def add_full_season(title: str, year_of_release: str, genre: str, no_of_seasons=1, no_of_episodes=1, no_of_plays=0):
         season_list = []
         for e in range(no_of_episodes):  
